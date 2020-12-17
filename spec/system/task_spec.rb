@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Task', type: :system do
-  include ApplicationHelper
   let(:project) { create(:project) }
   let(:task) { create(:task, project_id: project.id)}
 
@@ -66,6 +65,7 @@ RSpec.describe 'Task', type: :system do
         fill_in 'Deadline', with: Time.current
         click_button 'Update Task'
         click_link 'Back'
+        byebug
         expect(find('.task_list')).to have_content(short_time(Time.current))
         expect(current_path).to eq project_tasks_path(project)
       end
